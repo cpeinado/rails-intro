@@ -8,6 +8,15 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+
+    if(params[:sort].to_s == 'title')
+	@movies = @movies.sort_by {|m| m.title}
+    end
+
+    if(params[:sort].to_s == 'date')
+	@movies = @movies.sort_by {|m| m.release_date}
+    end 
+
   end
 
   def new
@@ -38,4 +47,5 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  
 end
